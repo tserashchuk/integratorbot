@@ -11,6 +11,11 @@
     <script>
         let tg = window.Telegram.WebApp;
     </script>
+    <a href="{% url 'login'%}">Логин</a></br>
+    <a href="{% url 'register'%}">Регистрация</a></br>
+    <a href="{% url 'cabinet'%}">Кабинет</a></br>
+    <a href="{% url 'addhook'%}">Добавить задание</a></br>
+    <a href="{% url 'logout'%}">Выйти</a></br>
     {% block content %}
     {% endblock %}
 

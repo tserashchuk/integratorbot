@@ -20,28 +20,7 @@ class Cabinet(LoginRequiredMixin,View):
         current_user = Client.objects.get(djuser=current_user)
         return render(request,'cabinet.html',{'current_user':current_user})
     
-class AddHook(LoginRequiredMixin,View):
 
-    login_url = '/login'
-    
-    def get(self,request):
-        current_user = request.user
-        current_user = Client.objects.get(djuser=current_user)
-        return render(request,'addhook.html')
-    
-    def post(self,request):
-        current_user = request.user
-        current_user = Client.objects.get(djuser=current_user)
-        value = request.POST.get("cre", "")
-        if value == '1':
-            PeriodicTask.objects.create(crontab=CrontabSchedule.objects.get(id=2), name='Формула прибыли каждый день'+str(current_user.tgid), task='deepseek.tasks.add',kwargs=json.dumps({'user': str(current_user.tgid)}))
-        elif value == '2':
-            print("You're yet to be born")
-        else: 
-            "You're too young to party"
-        current_user = request.user
-        current_user = Client.objects.get(djuser=current_user)
-        return render(request,'addhook.html')
     
 
 class Register(View):

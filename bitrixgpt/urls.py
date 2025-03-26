@@ -16,13 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from tgusers import views
+from tgusers import views as tview
+from deepseek import views as dview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.Login.as_view(), name='login'),
-    path('logout/', views.Logout.as_view(), name='logout'),
-    path('register/', views.Register.as_view(), name='register'),
-    path('cabinet/', views.Cabinet.as_view(), name='cabinet'),
-    path('addhook/', views.AddHook.as_view(), name='addhook'),
+    path('login/', tview.Login.as_view(), name='login'),
+    path('logout/', tview.Logout.as_view(), name='logout'),
+    path('register/', tview.Register.as_view(), name='register'),
+    path('cabinet/', tview.Cabinet.as_view(), name='cabinet'),
+    path('addhook/', dview.AddHook.as_view(), name='addhook'),
 ]
