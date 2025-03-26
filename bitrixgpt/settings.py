@@ -78,12 +78,15 @@ WSGI_APPLICATION = 'bitrixgpt.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd68r41ikafeq66', 
+        'USER': 'uc0hsr1nn06acl',
+        'PASSWORD': 'pab4e41100633e6ab893eec97243c8fd94eefa60df954e154a604058630cd8886',
+        'HOST': 'clhtb6lu92mj2.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com', 
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -127,7 +130,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CELERY_BROKER_URL = 'rediss://:p7427cde4c1301c0f24f3b41fd538badbc1fda4ecd5c9475649d5e019d9095950@ec2-52-212-133-20.eu-west-1.compute.amazonaws.com:25020'
+CELERY_BROKER_URL = 'rediss://:pb9a73c75838690d795b572c51cbc80a0af887ee366aa99de337052c410f696c7@ec2-52-16-26-206.eu-west-1.compute.amazonaws.com:14200'
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
 
