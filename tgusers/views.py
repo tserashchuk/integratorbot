@@ -34,7 +34,7 @@ class AddHook(LoginRequiredMixin,View):
         current_user = Client.objects.get(djuser=current_user)
         value = request.POST.get("cre", "")
         if value == '1':
-            PeriodicTask.objects.create(crontab=CrontabSchedule.objects.get(id=2), name='Формула прибыли каждый день', task='deepseek.tasks.add',kwargs=json.dumps({'user': current_user.tgid}))
+            PeriodicTask.objects.create(crontab=CrontabSchedule.objects.get(id=2), name='Формула прибыли каждый день'+str(current_user.tgid), task='deepseek.tasks.add',kwargs=json.dumps({'user': str(current_user.tgid)}))
         elif value == '2':
             print("You're yet to be born")
         else: 
