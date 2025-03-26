@@ -6,19 +6,26 @@
 <form method="POST" action="/register/">
     {% csrf_token %}
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Имя</label>
-      <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <label for="exampleInputEmail1" class="form-label">Имя пользователя</label>
+      <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
       <div id="emailHelp" class="form-text">Ваш провиль в тг</div>
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Пароль</label>
-      <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+      <input type="password" class="form-control" name="password" id="password">
     </div>
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Отличающийся от пароля в ТГ</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Чат для получения статистики</label>
+        <input type="text" class="form-control" name="chatid" id="chatid">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">ТГ аккаунт</label>
+        <input type="text" class="form-control" name="tusername" id="tusername">
+      </div>
+
+    <button type="submit" class="btn btn-primary">Регистрация</button>
   </form>
 
   <div id="datad"></div>
@@ -27,11 +34,8 @@
 
 
   <script>
-    document.getElementById('datad').innerText = tg.initDataUnsafe.user.id + tg.initDataUnsafe.user.username
-    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки 
-tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
-tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
-tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
-tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры 
+    document.getElementById('chatid').innerText = tg.initDataUnsafe.user.id
+    document.getElementById('tusername').innerText = tg.initDataUnsafe.user.username
+
    </script>
   {% endblock %}

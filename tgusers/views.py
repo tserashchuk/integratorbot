@@ -33,13 +33,15 @@ class Register(View):
     def post(self,request):
         name = request.POST.get("name", "")
         password = request.POST.get("password", "")
+        chatid = request.POST.get("chatid", "")
+        tusername = request.POST.get("tusername", "")
         user = authenticate(request, username=name, password=password)
         if user is not None:
             login(request, user)
             return redirect('cabinet')
         else:
             user = User.objects.create_user(username=name, password=password)
-            myuser = Client.objects.create(djuser=user)
+            myuser = Client.objects.create(djuser=user, tgname=tusername, tgid=chatid)
             login(request, user)
             return redirect('cabinet')
     
