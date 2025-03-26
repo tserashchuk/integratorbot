@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <script>
-    console.log(window.Telegram.WebApp.initDataUnsafe)
-    var WebApp = window.Telegram.WebApp;
-    WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
-   </script>
+
 
 <form method="POST" action="/register/">
     {% csrf_token %}
@@ -24,4 +20,12 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+
+  <div id="datad"></div>
+
+  <script>
+    document.getElementById(datad).innerText = window.Telegram.WebApp.initDataUnsafe
+    var WebApp = window.Telegram.WebApp;
+    WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
+   </script>
   {% endblock %}
