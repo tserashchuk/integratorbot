@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <script>
+    var WebApp = window.Telegram.WebApp;
+    WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
+   </script>
+
 <form method="POST" action="/register/">
     {% csrf_token %}
     <div class="mb-3">
