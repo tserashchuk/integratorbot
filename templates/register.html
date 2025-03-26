@@ -2,6 +2,7 @@
 
 {% block content %}
   <script>
+    console.log(window.Telegram.WebApp.initDataUnsafe)
     var WebApp = window.Telegram.WebApp;
     WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
    </script>
