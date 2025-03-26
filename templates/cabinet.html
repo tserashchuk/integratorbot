@@ -5,4 +5,8 @@
 {{current_user.tgname}}
 {{current_user.tgid}}
 <a href="{% url 'logout'%}">Выйти</a>
+
+{% for t in tast %}
+{{t}}
+{% endfor %}
 {% endblock %}

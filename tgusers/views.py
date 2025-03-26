@@ -9,7 +9,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
+from django_celery_beat.models import PeriodicTask, PeriodicTasks
 # Create your views here.
 class Cabinet(LoginRequiredMixin,View):
 
@@ -18,7 +18,8 @@ class Cabinet(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
-        return render(request,'cabinet.html',{'current_user':current_user})
+        tast=PeriodicTask.objects.all()
+        return render(request,'cabinet.html',{'current_user':current_user,'tast':tast})
     
 
 
