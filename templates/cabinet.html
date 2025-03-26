@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{current_user.djuser}}
+<a href="{% url 'logout'%}">Выйти</a>
+{% endblock %}
