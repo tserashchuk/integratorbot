@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="/addhook/">
+    {% csrf_token %}
+
+<select class="form-select" aria-label="Default select example" name="cre">
+  <option selected>Выберите доступные подписки</option>
+  <option value="1">Формула прибыли каждый день</option>
+  <option value="2">Формула прибыли раз в неделю</option>
+</select>
+
+    <button type="submit" class="btn btn-primary">Регистрация</button>
+  </form>
+
+{% endblock %}

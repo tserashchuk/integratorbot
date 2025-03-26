@@ -24,4 +24,5 @@ urlpatterns = [
     path('logout/', views.Logout.as_view(), name='logout'),
     path('register/', views.Register.as_view(), name='register'),
     path('cabinet/', views.Cabinet.as_view(), name='cabinet'),
+    path('addhook/', views.AddHook.as_view(), name='addhook'),
 ]

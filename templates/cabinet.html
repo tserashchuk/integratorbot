@@ -2,11 +2,16 @@
 
 {% block content %}
 {{current_user.djuser}}
-{{current_user.tgname}}
-{{current_user.tgid}}
+
+{% for d in current_user.tasks.all %}
+{{d.task}}</br>
+{{d.kwargs}}</br>
+{{d.interval}}</br>
+{% endfor %}
+
 <a href="{% url 'logout'%}">Выйти</a>
 
-{% for t in tast %}
-{{t}}
-{% endfor %}
+
+
+
 {% endblock %}
