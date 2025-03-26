@@ -24,8 +24,6 @@
   <div id="datad"></div>
 
   <script>
-    document.getElementById(datad).innerText = window.Telegram.WebApp.initDataUnsafe
-    var WebApp = window.Telegram.WebApp;
-    WebApp.showAlert(`Добро пожаловать, @${WebApp.WebAppUser.username}.`);
+    document.getElementById('datad').innerText = window.Telegram.WebApp.initDataUnsafe
    </script>
   {% endblock %}
