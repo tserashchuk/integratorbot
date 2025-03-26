@@ -9,7 +9,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django_celery_beat.models import PeriodicTask, PeriodicTasks
+from django_celery_beat.models import PeriodicTask
 # Create your views here.
 class Cabinet(LoginRequiredMixin,View):
 
