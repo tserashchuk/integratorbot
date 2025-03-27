@@ -10,6 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
+from bitrix24 import *
+from openai import OpenAI
 # Create your views here.
 class Cabinet(LoginRequiredMixin,View):
 
@@ -18,6 +20,28 @@ class Cabinet(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
+
+        myuser = Client.objects.get(tgid='553875205')
+        myuser_hook = myuser.clientuser.all()
+        # requests.get('https://api.telegram.org/bot8136233806:AAGkSfMW81OkcKffxwcFuZVZul7-_n81My8/sendMessage?chat_id=553875205&text='+str(myuser_hook[0].url))
+
+
+        bx24 = Bitrix24(str(myuser_hook[0].url))
+        data = bx24.callMethod('crm.deal.list',
+                       filter={'CLOSED': 'N',
+                               '>DATE_MODIFY':'2025-01-01'},)
+
+        client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
+
+        response = client.chat.completions.create(
+            model="deepseek-reasoner",
+            messages=[
+                {"role": "system", "content": 'пока ничего не делай с этими данными '+str(data)},
+                {"role": "user", "content": "выдели самые важные сделки с точки зрения максимизации прибыли, ответь кратко текстом без сложного форматирования"},
+            ],
+            stream=False
+        )
+        requests.get('https://api.telegram.org/bot8136233806:AAGkSfMW81OkcKffxwcFuZVZul7-_n81My8/sendMessage?chat_id=553875205&text='+str(response.choices[0].message.content))
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
