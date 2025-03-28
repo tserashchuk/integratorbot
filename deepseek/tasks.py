@@ -22,7 +22,7 @@ def addf(user):
 
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
-            {"role": "system", "content": 'представь что ты бизнес-аналитик. это json из crm системы битрикс24, '+str(data)},
+            {"role": "system", "content": 'представь что ты бизнес-аналитик. это данные из crm системы битрикс24, '+str(data)},
             {"role": "user", "content": 'систематизируй эти данные'}
       ]
    response = client.chat.completions.create(
