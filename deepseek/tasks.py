@@ -29,7 +29,7 @@ def addf(user):
       model="deepseek-reasoner",
       messages=messages
    )
-   messages.append({"role": "user", "content": str(response.choices[0].message.content)})
+   messages.append(response.choices[0].message.content)
    messages.append({"role": "user", "content": "выдели самые прибыльные сделки и напиши кому из лучше обработать. подготовь ответ на вопрос пользователя таким образом чтобы он был кратким и его можно было его отправить в телеграм - для выделения курсива и жирного шрифта используй html теги. Обрати внимание что название сделок хранится в поле TITLE. Критерии отбора не нужны. Все деньги в BYN"})
 
    response = client.chat.completions.create(
