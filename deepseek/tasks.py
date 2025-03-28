@@ -17,13 +17,13 @@ def addf(user):
    data = bx24.callMethod('crm.deal.list',
                   filter={'CLOSED': 'N',
                            '>DATE_CREATE':'2025-03-23'},
-                  select=['ID', 'TITLE', 'STAGE_ID','DATE_CREATE','DATE_MODIFY','CREATED_BY_ID','ASSIGNED_BY_ID','OPPORTUNITY','IS_RETURN_CUSTOMER','CONTACT_ID'])
+                  select=['ID', 'TITLE', 'STAGE_ID','DATE_CREATE','DATE_MODIFY','CREATED_BY_ID','ASSIGNED_BY_ID','OPPORTUNITY','IS_RETURN_CUSTOMER','CONTACT_ID','CATEGORY_ID'])
    
 
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'представь что ты бизнес-аналитик. это данные из crm системы битрикс24, '+str(data)},
-            {"role": "user", "content": 'систематизируй эти данные'}
+            {"role": "user", "content": 'систематизируй эти данные. для выделения курсива и жирного шрифта используй html теги'}
       ]
 
    response = client.chat.completions.create(
@@ -35,7 +35,10 @@ def addf(user):
 
 
    # Round 2
-   messages.append({"role": "user", "content": "выдели самые прибыльные сделки и напиши кому из лучше обработать. подготовь ответ на вопрос пользователя таким образом чтобы он был кратким и его можно было его отправить в телеграм - для выделения курсива и жирного шрифта используй html теги. Обрати внимание что название сделок хранится в поле TITLE. Критерии отбора не нужны. Все деньги в BYN"})
+   messages.append({"role": "user", "content": "выдели самые приоритетные сделки и напиши кому из лучше обработать. "
+   "подготовь ответ на вопрос пользователя таким образом чтобы он был кратким и его можно было его отправить в телеграм - для выделения курсива и жирного шрифта используй html теги. "
+   "Обрати внимание что название сделок хранится в поле TITLE. Критерии отбора не нужны. Все деньги в BYN."
+   "если направлений сделок несколько то выдели ТОП3 приоритетных для каждого направления сделок"})
    response = client.chat.completions.create(
       model="deepseek-chat",
       messages=messages
