@@ -16,7 +16,7 @@ def addf(user):
   
    data = bx24.callMethod('crm.deal.list',
                   filter={'CLOSED': 'N',
-                           '>DATE_CREATE':'2025-03-01'},)
+                           '>DATE_CREATE':'2025-03-24'},)
    
    print(type(data))
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
