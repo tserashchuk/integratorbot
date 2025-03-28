@@ -45,7 +45,7 @@ class Register(View):
             return redirect('cabinet')
         else:
             user = User.objects.create_user(username=name, password=password)
-            hook = ClientHook.objects.create(hook=formhook,name=str(user.username)+' deals')
+            hook = ClientHook.objects.create(url=formhook,name=str(user.username)+' deals')
             myuser = Client.objects.create(djuser=user, tgname=tusername, tgid=chatid, clientuser=hook)
             login(request, user)
             return redirect('cabinet')
