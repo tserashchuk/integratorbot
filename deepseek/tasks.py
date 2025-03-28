@@ -43,6 +43,9 @@ def addf(user):
             modified_deals += 1
 
    # Расчет процента
+   if total_deals == 0 or total_deals=='':
+       total_deals=1
+
    percentage_modified = (modified_deals / total_deals) * 100
 
    requests.get('https://api.telegram.org/bot8136233806:AAGkSfMW81OkcKffxwcFuZVZul7-_n81My8/sendMessage?chat_id='+str(user)+'&text='
