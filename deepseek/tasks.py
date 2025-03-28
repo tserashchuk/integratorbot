@@ -24,8 +24,8 @@ def addf(user):
    response = client.chat.completions.create(
       model="deepseek-reasoner",
       messages=[
-            {"role": "system", "content": 'это json из crm системы битрикс24, подготовь ответ на вопрос пользователя таким образом чтобы он был кратким и потом можно бало его отправить в телеграм не меняя форматирования. Обрати внимание что название сделок хранится в поле TITLE'+str(data)},
-            {"role": "user", "content": "выдели самые важные сделки с точки зрения максимизации прибыли"},
+            {"role": "system", "content": 'это json из crm системы битрикс24, подготовь ответ на вопрос пользователя таким образом чтобы он был кратким и его можно было его отправить в телеграм - для выделения курсива и жирного шрифта используй html теги. Обрати внимание что название сделок хранится в поле TITLE. Критерии отбора не нужны'+str(data)},
+            {"role": "user", "content": "выдели самые прибыльные сделки и одним небольшим абзацем напиши какие сделки лучше закрыть срочно"},
       ],
       stream=False
    )
@@ -47,11 +47,11 @@ def addf(user):
        total_deals=1
 
    percentage_modified = (modified_deals / total_deals) * 100
-
    requests.get('https://api.telegram.org/bot8136233806:AAGkSfMW81OkcKffxwcFuZVZul7-_n81My8/sendMessage?chat_id='+str(user)+'&text='
                +str(f"Процент измененных сделок: {percentage_modified:.2f}%\n")
                +str(f"Общее количество сделок: {total_deals}\n")
                +str(f"Измененных сделок: {modified_deals}\n\n\n")
                +str(response.choices[0].message.content)
+               +'&parse_mode=html'
                )
    return 'f'
