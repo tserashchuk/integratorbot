@@ -8,26 +8,26 @@
     {% csrf_token %}
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Имя пользователя</label>
-      <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+      <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" required >
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Пароль</label>
-      <input type="password" class="form-control" name="password" id="password">
+      <input type="password" class="form-control" name="password" id="password" required >
     </div>
 
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Чат для получения статистики</label>
-      <input type="text" class="form-control" name="chatid" id="chatid">
+      <input type="text" class="form-control" name="chatid" id="chatid" required >
     </div>
 
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">ТГ аккаунт</label>
-      <input type="text" class="form-control" name="tusername" id="tusername">
+      <input type="text" class="form-control" name="tusername" id="tusername" required >
     </div>
 
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Исходящий веб-хук с разрешением CRM</label>
-      <input type="text" class="form-control" name="hook" id="hook">
+      <input type="text" class="form-control" name="hook" id="hook" required >
     </div>
 
     <button type="submit" class="btn btn-primary">Регистрация</button>
