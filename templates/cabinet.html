@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{current_user.djuser}}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'addhook'%}">Добавить задание</a></br>
+        </div>
+        <div class="col">
+            <a href="{% url 'logout'%}">Выйти</a></br>
+        </div>
+      </div>
+    {{current_user.djuser}}
 
-{% for d in current_user.tasks.all %}
-{{d.task}}</br>
-{{d.kwargs}}</br>
-{{d.interval}}</br>
-{% endfor %}
-
+    {% for d in current_user.tasks.all %}
+    {{d.task}}</br>
+    {{d.kwargs}}</br>
+    {{d.interval}}</br>
+    {% endfor %}
+</div>
 
 
 

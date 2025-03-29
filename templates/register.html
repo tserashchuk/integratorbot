@@ -2,11 +2,9 @@
 {% load static %}
 {% block content %}
 
-<style>
+<div class="container">
+  <form method="POST" action="/register/">
 
-
-</style>
-<form method="POST" action="/register/">
     {% csrf_token %}
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Имя пользователя</label>
@@ -18,31 +16,27 @@
     </div>
 
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Чат для получения статистики</label>
-        <input type="text" class="form-control" name="chatid" id="chatid">
-      </div>
+      <label for="exampleInputPassword1" class="form-label">Чат для получения статистики</label>
+      <input type="text" class="form-control" name="chatid" id="chatid">
+    </div>
 
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">ТГ аккаунт</label>
-        <input type="text" class="form-control" name="tusername" id="tusername">
-      </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">ТГ аккаунт</label>
+      <input type="text" class="form-control" name="tusername" id="tusername">
+    </div>
 
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Хук с разрешением crm</label>
-        <input type="text" class="form-control" name="hook" id="hook">
-      </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Хук с разрешением crm</label>
+      <input type="text" class="form-control" name="hook" id="hook">
+    </div>
 
     <button type="submit" class="btn btn-primary">Регистрация</button>
+
   </form>
+</div>
 
-  <div id="datad"></div>
-
-
-
-
-  <script>
-    document.getElementById('chatid').value = tg.initDataUnsafe.user.id
-    document.getElementById('tusername').value = tg.initDataUnsafe.user.username
-
-   </script>
-  {% endblock %}
+<script>
+  document.getElementById('chatid').value = tg.initDataUnsafe.user.id
+  document.getElementById('tusername').value = tg.initDataUnsafe.user.username
+</script>
+{% endblock %}

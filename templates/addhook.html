@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
+
+
+
+<div class="row">
+  <div class="col">
+    <a href="{% url 'cabinet'%}">Кабинет</a></br>
+  </div>
+  <div class="col">
+    <a href="{% url 'logout'%}">Выйти</a></br>
+  </div>
+</div>
 
 <form method="POST" action="/addhook/">
-    {% csrf_token %}
-
-<select class="form-select" aria-label="Default select example" name="cre">
-  <option selected>Выберите доступные подписки</option>
-  <option value="1">Выбери это</option>
-
-</select>
-
-    <button type="submit" class="btn btn-primary">Создать</button>
-  </form>
-
+  {% csrf_token %}
+  <select class="form-select" aria-label="Default select example" name="cre">
+    <option selected>Выберите доступные подписки</option>
+    <option value="1">Выбери это</option>
+  </select>
+  <button type="submit" class="btn btn-primary">Создать</button>
+</form>
+</div>
 {% endblock %}
