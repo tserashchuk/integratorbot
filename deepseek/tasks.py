@@ -45,7 +45,7 @@ def addf(user):
    )
 
 
-   requests.get('https://api.telegram.org/bot7896963077:AAFkidnFgH254aGKVD_iaFza6eZnrkHNNoM/sendMessage?chat_id='+str(user)+'&text='
+   requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id='+str(user)+'&text='
                +str(response.choices[0].message.content)
                +'&parse_mode=html'
                )
