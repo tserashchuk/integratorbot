@@ -51,6 +51,8 @@ def addf(user):
                )
    return 'f'
 
+
+@shared_task
 def reccomend(user):
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
