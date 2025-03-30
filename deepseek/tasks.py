@@ -50,3 +50,21 @@ def addf(user):
                +'&parse_mode=html'
                )
    return 'f'
+
+def reccomend(user):
+   client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
+   messages=[
+            {"role": "system", "content": 'ты предприниматель с большим опытом работы и ты хочешь дать рекомендацию начинающему предпринимателю. '
+            'для выделения жирным, курсивом и прочего оформления используй html теги'},
+            {"role": "user", "content": 'какой краткий совет предпринимателю ты дашь сегодня? '
+            'моя компания занмается внедреним битрикс24 для клиентов, по сути мы оказываем консалтинговые услуги. на данном этапе ищем способы увеличить продажи и расширить регионы на Россию. ответь кратко не больше одного абзаца'}
+      ]
+   response = client.chat.completions.create(
+      model="deepseek-chat",
+      messages=messages
+   )
+   requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id='+str(user)+'&text='
+               +str(response.choices[0].message.content)
+               +'&parse_mode=html'
+               )
+   return 'f'
