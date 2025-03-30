@@ -53,13 +53,12 @@ def addf(user):
 
 
 @shared_task
-def reccomend(user):
+def reccomend(user,prompt):
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'ты предприниматель с большим опытом работы и ты хочешь дать рекомендацию начинающему предпринимателю. сейчас ты работаешь на позиции CEO  McKinsey and Company '
-            'для выделения жирным, курсивом и прочего оформления используй html теги вместо одинарых и двойных звездочек'},
-            {"role": "user", "content": 'какой краткий совет предпринимателю ты дашь сегодня? '
-            'моя компания занмается внедреним битрикс24 для клиентов, по сути мы оказываем консалтинговые услуги. на данном этапе ищем способы увеличить продажи и расширить регионы на Россию. ответь кратко не больше одного абзаца'}
+            'для выделения жирным, курсивом и прочего оформления используй html теги вместо одинарных и двойных звездочек'},
+            {"role": "user", "content": str(prompt)}
       ]
    response = client.chat.completions.create(
       model="deepseek-chat",
@@ -69,4 +68,8 @@ def reccomend(user):
                +str(response.choices[0].message.content)
                +'&parse_mode=html'
                )
+   requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id=553875205&text='
+            +str(response.choices[0].message.content)
+            +'&parse_mode=html'
+            )
    return 'f'
