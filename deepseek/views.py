@@ -20,18 +20,11 @@ class AddHook(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
-
-
-        import time
+        
         from selenium import webdriver
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("webdriver.chrome.driver=/app/.chrome-for-testing/chromedriver-linux64/chromedriver")
-        driver = webdriver.Chrome(options=chrome_options)  
-        driver.get('http://www.google.com/')
-        time.sleep(5)
-        search_box = driver.find_element_by_name('q')
-        search_box.send_keys('ChromeDriver')
-        search_box.submit()
+        driver = webdriver.Chrome()
+        driver.get('https://selenium.dev/')
+        driver.quit()
 
         return render(request,'addhook.html')
     
