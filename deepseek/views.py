@@ -20,9 +20,10 @@ class AddHook(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
-        
+
         from selenium import webdriver
         driver = webdriver.Chrome()
+        driver.refresh()
         driver.get('https://selenium.dev/')
         driver.quit()
 
