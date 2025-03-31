@@ -24,15 +24,15 @@ class AddHook(LoginRequiredMixin,View):
 
         import time
         from selenium import webdriver
-
-        driver = webdriver.Chrome('/app/.chrome-for-testing/chromedriver-linux64/chromedriver')  
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument("webdriver.chrome.driver=/app/.chrome-for-testing/chromedriver-linux64/chromedriver")
+        driver = webdriver.Chrome(options=chrome_options)  
         driver.get('http://www.google.com/')
         time.sleep(5)
         search_box = driver.find_element_by_name('q')
         search_box.send_keys('ChromeDriver')
         search_box.submit()
-        time.sleep(5) 
-        driver.quit()
+
         return render(request,'addhook.html')
     
     def post(self,request):
