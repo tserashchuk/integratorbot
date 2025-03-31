@@ -25,11 +25,17 @@ class AddHook(LoginRequiredMixin,View):
         current_user = Client.objects.get(djuser=current_user)
 
 
-        options = Options()
-        options.add_argument("start-maximized")
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        d = driver.get("https://owner.by")
-        print(d)
+        import time
+        from selenium import webdriver
+
+        driver = webdriver.Chrome('/app/.chrome-for-testing/chromedriver-linux64/chromedriver')  # Optional argument, if not specified will search path.
+        driver.get('http://www.google.com/');
+        time.sleep(5) # Let the user actually see something!
+        search_box = driver.find_element_by_name('q')
+        search_box.send_keys('ChromeDriver')
+        search_box.submit()
+        time.sleep(5) # Let the user actually see something!
+        driver.quit()
         return render(request,'addhook.html')
     
     def post(self,request):
