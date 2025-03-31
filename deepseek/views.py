@@ -11,10 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+
 
 class AddHook(LoginRequiredMixin,View):
 
@@ -28,13 +25,13 @@ class AddHook(LoginRequiredMixin,View):
         import time
         from selenium import webdriver
 
-        driver = webdriver.Chrome('/app/.chrome-for-testing/chromedriver-linux64/chromedriver')  # Optional argument, if not specified will search path.
-        driver.get('http://www.google.com/');
-        time.sleep(5) # Let the user actually see something!
+        driver = webdriver.Chrome('/app/.chrome-for-testing/chromedriver-linux64/chromedriver')  
+        driver.get('http://www.google.com/')
+        time.sleep(5)
         search_box = driver.find_element_by_name('q')
         search_box.send_keys('ChromeDriver')
         search_box.submit()
-        time.sleep(5) # Let the user actually see something!
+        time.sleep(5) 
         driver.quit()
         return render(request,'addhook.html')
     
