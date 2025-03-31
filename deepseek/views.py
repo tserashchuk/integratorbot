@@ -21,11 +21,6 @@ class AddHook(LoginRequiredMixin,View):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
 
-        options = webdriver.FirefoxOptions()
-        options.set_window_rect = True # Full support in Firefox
-        driver = webdriver.Firefox(options=options)
-        driver.get("https://www.selenium.dev/")
-        driver.quit()
         return render(request,'addhook.html')
     
     def post(self,request):
