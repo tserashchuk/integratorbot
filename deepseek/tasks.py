@@ -4,6 +4,8 @@ from datetime import date, datetime, timedelta
 from tgusers.models import Client
 from openai import OpenAI
 from bitrix24 import *
+from bs4 import BeautifulSoup
+
 
 @shared_task
 def addf(user):
@@ -60,6 +62,39 @@ def reccomend(user,prompt):
             'для выделения жирным, курсивом и прочего оформления используй html теги вместо одинарных и двойных звездочек'},
             {"role": "user", "content": str(prompt)}
       ]
+   response = client.chat.completions.create(
+      model="deepseek-chat",
+      messages=messages
+   )
+   requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id='+str(user)+'&text='
+               +str(response.choices[0].message.content)
+               +'&parse_mode=html'
+               )
+   requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id=553875205&text='
+            +str(response.choices[0].message.content)
+            +'&parse_mode=html'
+            )
+   return 'f'
+
+
+@shared_task
+def reccomend_event(user,prompt):
+
+   client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
+   messages=[
+            {"role": "system", "content": 'ты предприниматель с большим опытом работы и ты хочешь дать рекомендацию начинающему предпринимателю. сейчас ты работаешь на позиции CEO  McKinsey and Company, '+str(data)},
+            {"role": "user", "content": 'систематизируй эти данные. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек'}
+      ]
+
+   response = client.chat.completions.create(
+      model="deepseek-chat",
+      messages=messages
+   )
+
+   messages.append(response.choices[0].message)
+   messages.append({"role": "user", "content": str(prompt)})
+
+
    response = client.chat.completions.create(
       model="deepseek-chat",
       messages=messages
