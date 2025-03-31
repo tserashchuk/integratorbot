@@ -22,22 +22,6 @@ class Cabinet(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
-
-
-
-        browser = webdriver.Chrome()
-
-        browser.get("https://owner.by/events/")
-        bso = BeautifulSoup(browser.page_source, 'lxml')
-        res1 = bso.find_all('section',{ "class" : "section events-section" })
-
-        browser.get("https://probusiness.io/section/events/")
-        bsp = BeautifulSoup(browser.page_source, 'lxml')
-        res2= bsp.find_all('ul',{ "class" : "news_list" })
-        res=res1+res2
-
-        print(res)
-
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
