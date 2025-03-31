@@ -11,6 +11,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 class AddHook(LoginRequiredMixin,View):
 
     login_url = '/login'
@@ -19,15 +24,12 @@ class AddHook(LoginRequiredMixin,View):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
 
-        from selenium import webdriver
-        from selenium.webdriver.chrome.options import Options
-        from selenium.webdriver.chrome.service import Service
-        from webdriver_manager.chrome import ChromeDriverManager
 
         options = Options()
         options.add_argument("start-maximized")
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        driver.get("https://www.google.com")
+        d = driver.get("https://owner.by")
+        print(d)
         return render(request,'addhook.html')
     
     def post(self,request):
