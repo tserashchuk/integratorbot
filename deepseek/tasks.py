@@ -5,7 +5,7 @@ from tgusers.models import Client
 from openai import OpenAI
 from bitrix24 import *
 from bs4 import BeautifulSoup
-
+import re
 
 @shared_task
 def addf(user):
@@ -21,7 +21,10 @@ def addf(user):
                            '>DATE_CREATE':'2025-03-25'},
                   select=['ID', 'TITLE', 'STAGE_ID','DATE_CREATE','DATE_MODIFY','CREATED_BY_ID','ASSIGNED_BY_ID','OPPORTUNITY','IS_RETURN_CUSTOMER','CONTACT_ID','CATEGORY_ID'])
    
-
+   data = re.sub(r", ", ",", str(data))
+   data = re.sub(r": ", ":", str(data))
+   data = re.sub(r"'", "", str(data))
+   
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'представь что ты бизнес-аналитик. это данные из crm системы битрикс24, '+str(data)},

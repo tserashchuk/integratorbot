@@ -21,7 +21,17 @@ class Cabinet(LoginRequiredMixin,View):
     
     def get(self,request):
         current_user = request.user
-        current_user = Client.objects.get(djuser=current_user)
+        current_user = Client.objects.get(djuser=current_user)    
+        from google import genai
+        client = genai.Client(api_key="AIzaSyDaW1sXbuxSHd6MqjtotIUZwA-KJpqNKHU")
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents="посоветуй чтото для сайта beleuroprivod.by",
+        )
+        requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id=553875205&text='
+        +str(response.text)
+        +'&parse_mode=html'
+        )
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
