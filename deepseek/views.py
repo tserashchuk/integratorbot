@@ -11,6 +11,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
 
+from selenium import webdriver
+
 class AddHook(LoginRequiredMixin,View):
 
     login_url = '/login'
@@ -18,6 +20,7 @@ class AddHook(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
+
         return render(request,'addhook.html')
     
     def post(self,request):
