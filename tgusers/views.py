@@ -23,12 +23,21 @@ class Cabinet(LoginRequiredMixin,View):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)    
 
-        import os
+        import time
+
         from selenium import webdriver
-        from selenium.webdriver.chrome.service import Service
-        driver = webdriver.Chrome()
-        driver.get('https://gemini.google.com/')
-        driver.quit()
+        from webdriver_manager.chrome import ChromeDriverManager
+
+        gChromeOptions = webdriver.ChromeOptions()
+        gChromeOptions.add_argument("window-size=1920x1480")
+        gChromeOptions.add_argument("disable-dev-shm-usage")
+        gDriver = webdriver.Chrome(
+            chrome_options=gChromeOptions, executable_path=ChromeDriverManager().install()
+        )
+        gDriver.get("https://www.python.org/")
+        time.sleep(3)
+        gDriver.close()
+        
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
