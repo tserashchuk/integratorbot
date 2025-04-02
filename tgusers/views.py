@@ -25,14 +25,16 @@ class Cabinet(LoginRequiredMixin,View):
 
         import os
         from selenium import webdriver
-
+        from selenium.webdriver.chrome.service import Service
         op = webdriver.ChromeOptions()
         op.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
         op.add_argument("--headless")
         op.add_argument("--no-sandbox")
         op.add_argument("--disable-dev-sh-usage")
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=op)
+        service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+        driver = webdriver.Chrome(service=service, options=op)
         driver.get('https://gemini.google.com/')
+        driver.quit()
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
