@@ -27,17 +27,11 @@ class Cabinet(LoginRequiredMixin,View):
 
         from selenium import webdriver
         from webdriver_manager.chrome import ChromeDriverManager
+        from selenium.webdriver.chrome.service import Service as ChromeService
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        driver.get("https://www.python.org/")
+        driver.close()
 
-        gChromeOptions = webdriver.ChromeOptions()
-        gChromeOptions.add_argument("window-size=1920x1480")
-        gChromeOptions.add_argument("disable-dev-shm-usage")
-        gDriver = webdriver.Chrome(
-            chrome_options=gChromeOptions, executable_path=ChromeDriverManager().install()
-        )
-        gDriver.get("https://www.python.org/")
-        time.sleep(3)
-        gDriver.close()
-        
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
