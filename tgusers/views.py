@@ -22,16 +22,6 @@ class Cabinet(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)    
-
-        import time
-
-        from selenium import webdriver
-        from webdriver_manager.chrome import ChromeDriverManager
-        from selenium.webdriver.chrome.service import Service as ChromeService
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-        driver.get("https://www.python.org/")
-        driver.close()
-
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
