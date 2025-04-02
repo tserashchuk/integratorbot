@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
 CELERY_BROKER_URL = 'rediss://:pb9a73c75838690d795b572c51cbc80a0af887ee366aa99de337052c410f696c7@ec2-52-16-26-206.eu-west-1.compute.amazonaws.com:14200'
 CELERY_RESULT_BACKEND = "django-db"
