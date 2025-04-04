@@ -62,7 +62,7 @@ def reccomend(user,prompt):
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'ты предприниматель с большим опытом работы и ты хочешь дать рекомендацию начинающему предпринимателю. сейчас ты работаешь на позиции CEO  McKinsey and Company '
-            'для выделения жирным, курсивом и прочего оформления используй html теги вместо одинарных и двойных звездочек'},
+            'для выделения жирным, курсивом и прочего оформления используй html теги вместо одинарных и двойных звездочек. вообще не используй символ * '},
             {"role": "user", "content": str(prompt)}
       ]
    response = client.chat.completions.create(
