@@ -113,12 +113,16 @@ def reccomend_event(user,prompt):
             message+= f"Менеджер ID {manager} - {manager_stats[manager]['deal_count']} сделок ({manager_stats[manager]['total_amount']}BYN)\n"
    except (ValueError, KeyError) as e:
       print(f"Ошибка обработки сделки {e}")
-
+   print(message)
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'ты бизнес-аналитик с большим опытом работы и ты хочешь дать выводы из информации. сейчас ты работаешь в McKinsey and Company, '+str(message)},
             {"role": "user", "content": 'сделай выводы из этих данных. не задавай вопросов и не предлагай сделать уточнения. подготовь форматирование сообщения для отправки в telegram но не упоминай про это. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек. не используй символ *'}
       ]
+   requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id='+str(user)+'&text='
+               +str(response.choices[0].message.content)
+               +'&parse_mode=html'
+               )
 
    response = client.chat.completions.create(
       model="deepseek-chat",
