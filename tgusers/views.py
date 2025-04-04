@@ -14,14 +14,26 @@ from bitrix24 import *
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import os
+import json
+from datetime import datetime, timedelta
 # Create your views here.
+
+
+
+
+
+
+
 class Cabinet(LoginRequiredMixin,View):
 
     login_url = '/login'
     
     def get(self,request):
         current_user = request.user
-        current_user = Client.objects.get(djuser=current_user)    
+        current_user = Client.objects.get(djuser=current_user)
+
+
+        
         return render(request,'cabinet.html',{'current_user':current_user})
     
 
