@@ -18,7 +18,7 @@ def addf(user):
   
    data = bx24.callMethod('crm.deal.list',
                   filter={'CLOSED': 'N',
-                           '>DATE_CREATE':'2025-03-25'},
+                           '>DATE_CREATE':'2025-03-31'},
                   select=['ID', 'TITLE', 'STAGE_ID','DATE_CREATE','DATE_MODIFY','CREATED_BY_ID','ASSIGNED_BY_ID','OPPORTUNITY','IS_RETURN_CUSTOMER','CONTACT_ID','CATEGORY_ID'])
    
    data = re.sub(r", ", ",", str(data))
