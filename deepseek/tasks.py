@@ -39,7 +39,7 @@ def addf(user):
 
    messages.append(response.choices[0].message)
    messages.append({"role": "user", "content": "выдели самые приоритетные сделки и напиши кому из лучше обработать. "
-   "подготовь ответ на вопрос пользователя таким образом чтобы он был кратким - "
+   "подготовь ответ на вопрос пользователя таким образом чтобы он был кратким - подготовь форматирование сообщения для отправки в telegram но не упоминай про это."
    "для выделения курсива и жирного шрифта используй html теги но не указывай их в сообщении, не используй одинарных и двоных звездочек. вообще не используй символ * "
    "Обрати внимание что название сделок хранится в поле TITLE. Критерии отбора и особенности ответа не нужны. Все деньги в BYN."
    "если направлений сделок несколько то выдели ТОП3 приоритетных для каждого направления сделок и сделай рекомендации для директора в кратком абзаце в конце"})
@@ -62,7 +62,7 @@ def addf(user):
 def reccomend(user,prompt):
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
-            {"role": "system", "content": 'ты предприниматель с большим опытом работы и ты хочешь дать рекомендацию начинающему предпринимателю. сейчас ты работаешь на позиции CEO  McKinsey and Company '
+            {"role": "system", "content": 'ты предприниматель с большим опытом работы и ты хочешь дать рекомендацию начинающему предпринимателю. сейчас ты работаешь на позиции CEO  McKinsey and Company. подготовь форматирование сообщения для отправки в telegram но не упоминай про это.'
             'для выделения жирным, курсивом и прочего оформления используй html теги вместо одинарных и двойных звездочек. вообще не используй символ * '},
             {"role": "user", "content": str(prompt)}
       ]
@@ -111,19 +111,13 @@ def reccomend_event(user,prompt):
       for manager in manager_stats:              
             total_week+=float(manager_stats[manager]['total_amount'])
             message+= f"Менеджер ID {manager} - {manager_stats[manager]['deal_count']} сделок ({manager_stats[manager]['total_amount']}BYN)\n"
-      
-      requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id=553875205&text='
-      +message
-      +'&parse_mode=html'
-      )    
-      print(message)
    except (ValueError, KeyError) as e:
       print(f"Ошибка обработки сделки {e}")
 
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'ты бизнес-аналитик с большим опытом работы и ты хочешь дать выводы из информации. сейчас ты работаешь в McKinsey and Company, '+str(message)},
-            {"role": "user", "content": 'сделай выводы из этих данных. не задавай вопросов и не предлагай сделать уточнения для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек. не используй символ *'}
+            {"role": "user", "content": 'сделай выводы из этих данных. не задавай вопросов и не предлагай сделать уточнения. подготовь форматирование сообщения для отправки в telegram но не упоминай про это. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек. не используй символ *'}
       ]
 
    response = client.chat.completions.create(
