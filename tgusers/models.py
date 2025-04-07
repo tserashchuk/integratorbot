@@ -14,6 +14,7 @@ class Client(models.Model):
     phone = models.CharField('Телефон', max_length=200, blank=True)
     tgid = models.CharField('айди телеги', max_length=200, blank=True)
     tgname = models.CharField('имя телеги', max_length=200, blank=True)
+    about = models.CharField('О компании', max_length=1000, blank=True)
     tasks = models.ManyToManyField(PeriodicTask)
     clientuser = models.ManyToManyField(ClientHook)
 

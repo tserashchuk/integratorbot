@@ -51,6 +51,7 @@ class Register(View):
         chatid = request.POST.get("chatid", "")
         tusername = request.POST.get("tusername", "")
         formhook = request.POST.get("hook", "")
+        about = request.POST.get("about", "")
         user = authenticate(request, username=name, password=password)
         if user is not None:
             login(request, user)
@@ -58,7 +59,7 @@ class Register(View):
         else:
             user = User.objects.create_user(username=name, password=password)
             hook = ClientHook.objects.create(url=formhook,name=str(user.username)+' deals')
-            myuser = Client.objects.create(djuser=user, tgname=tusername, tgid=chatid)
+            myuser = Client.objects.create(djuser=user, tgname=tusername, tgid=chatid, about=about)
             myuser.clientuser.add(hook)
             login(request, user)
             return redirect('cabinet')
