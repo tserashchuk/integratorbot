@@ -9,14 +9,49 @@
 
     <div class="card">
         <div class="card-body">
-            {{d}}
+          <span>{{d}}
+          <button type="button" class="close deletetask" aria-label="Close" data-tid="{{d.id}}">
+            <span aria-hidden="true">&times;</span>
+          </button></span>
         </div>
       </div>
 
     {% endfor %}
 </div>
 
+<script>
+   function sendStatistic(tid) {
+    const csrftoken = getCookie('csrftoken');
 
+
+ 
+
+
+    var form = document.createElement('form');
+    document.body.appendChild(form);
+    form.method = 'post';
+    form.action = "{% url 'cabinet' %}";
+    
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'tid';
+        input.value = tid;
+        form.appendChild(input);
+        var inputElem = document.createElement('input');
+        inputElem.type = 'hidden';
+        inputElem.name = 'csrfmiddlewaretoken';
+        inputElem.value = '{{ csrf_token }}';
+        form.appendChild(inputElem);
+
+    form.submit();
+   }
+
+Array.from(document.getElementsByClassName('close deletetask')).forEach((element) => {
+  element.addEventListener("click",()=>sendStatistic(element.dataset.tid))
+});
+
+
+</script>
 
 
 {% endblock %}

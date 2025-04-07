@@ -4,7 +4,7 @@ import requests
 import json
 from tgusers.models import *
 from bitrix24 import *
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
@@ -31,10 +31,15 @@ class Cabinet(LoginRequiredMixin,View):
     def get(self,request):
         current_user = request.user
         current_user = Client.objects.get(djuser=current_user)
-
-
-        
         return render(request,'cabinet.html',{'current_user':current_user})
+    
+    def post(self,request):
+        current_user = request.user
+        current_user = Client.objects.get(djuser=current_user)
+        tid = request.POST.get("tid", "")
+        task = PeriodicTask.objects.get(id=tid)
+        task.delete()
+        return redirect('cabinet')
     
 
 class Register(View):
