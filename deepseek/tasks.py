@@ -119,7 +119,7 @@ def reccomend_event(user,prompt):
             {"role": "user", "content": 'сделай выводы из этих данных. не задавай вопросов и не предлагай сделать уточнения. подготовь форматирование сообщения для отправки в telegram но не упоминай про это. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек. не используй символ *'}
       ]
 
-
+   print(message)
    response = client.chat.completions.create(
       model="deepseek-chat",
       messages=messages
