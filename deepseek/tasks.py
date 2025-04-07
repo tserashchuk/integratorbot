@@ -94,7 +94,7 @@ def reccomend_event(user,prompt):
    for deal in data:
       try:
             manager_id = deal.get("ASSIGNED_BY_ID", "unknown")
-            amount = float(deal.get("OPPORTUNITY", "0")) if deal.get("STAGE_ID") == "WON" else 0
+            amount = float(deal.get("OPPORTUNITY", "0"))
             
             if manager_id not in manager_stats:
                manager_stats[manager_id] = {
