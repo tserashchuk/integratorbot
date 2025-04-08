@@ -66,6 +66,7 @@ def reccomend(user,prompt):
             'для выделения жирным, курсивом и прочего оформления используй html теги вместо одинарных и двойных звездочек. вообще не используй символ * '},
             {"role": "user", "content": "какой краткий совет предпринимателю ты дашь сегодня?"+str(prompt)+"ответь кратко не больше одного абзаца"}
       ]
+   print(str(prompt))
    response = client.chat.completions.create(
       model="deepseek-chat",
       messages=messages
@@ -74,10 +75,6 @@ def reccomend(user,prompt):
                +str(response.choices[0].message.content)
                +'&parse_mode=html'
                )
-   requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id=553875205&text='
-            +str(response.choices[0].message.content)
-            +'&parse_mode=html'
-            )
    return 'f'
 
 
