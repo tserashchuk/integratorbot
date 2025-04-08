@@ -87,7 +87,7 @@ def reccomend_event(user,prompt):
    manager_stats = {}
    bx24 = Bitrix24(str(myuser_hook[0].url))    
    data = bx24.callMethod('crm.deal.list',
-            filter={'CLOSED':'Y','STAGE_SEMANTIC_ID': 'S','>CLOSEDATE':'2025-03-31'})
+            filter={'CLOSED':'Y','STAGE_SEMANTIC_ID': 'S','>CLOSEDATE':'2025-01-15'})
    for deal in data:
       try:
             manager_id = deal.get("ASSIGNED_BY_ID", "unknown")
