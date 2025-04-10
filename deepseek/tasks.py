@@ -126,7 +126,7 @@ def reccomend_event(user,prompt):
 
 
    response = client.chat.completions.create(
-      model="deepseek-reasoner",
+      model="deepseek-chat",
       messages=messages
    )
    requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id='+str(user)+'&text='
