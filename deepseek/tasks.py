@@ -113,12 +113,12 @@ def reccomend_event(user,prompt):
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'ты бизнес-аналитик с большим опытом работы и ты хочешь дать выводы из информации. сейчас ты работаешь в McKinsey and Company, '+str(message)},
-            {"role": "user", "content": 'сделай выводы из этих данных. не задавай вопросов и не предлагай сделать уточнения. подготовь форматирование сообщения для отправки в telegram но не упоминай про это. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек. не используй символ *'}
+            {"role": "user", "content": 'сделай максимально широкие выводы из этих данных если нужно используй поиск в интернете. не задавай вопросов и не предлагай сделать уточнения. подготовь форматирование сообщения для отправки в telegram но не упоминай про это. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек. не используй символ *'}
       ]
 
    print(message)
    response = client.chat.completions.create(
-      model="deepseek-reasoner",
+      model="deepseek-chat",
       messages=messages
    )
    messages.append(response.choices[0].message)
