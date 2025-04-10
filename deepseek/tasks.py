@@ -29,7 +29,7 @@ def addf(user):
    client = OpenAI(api_key="sk-84f8be873ef144618d50838c7b548fcd", base_url="https://api.deepseek.com")
    messages=[
             {"role": "system", "content": 'представь что ты бизнес-аналитик. это данные из crm системы битрикс24, '+str(data)},
-            {"role": "user", "content": 'систематизируй эти данные. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек'}
+            {"role": "user", "content": 'систематизируй эти данные. для выделения курсива и жирного шрифта используй html теги без одинарных и двойных звездочек, вообще не используй символ * не используй символ звездочки'}
       ]
 
    response = client.chat.completions.create(
@@ -40,7 +40,7 @@ def addf(user):
    messages.append(response.choices[0].message)
    messages.append({"role": "user", "content": "выдели самые приоритетные сделки и напиши кому из лучше обработать. "
    "подготовь ответ на вопрос пользователя таким образом чтобы он был кратким - подготовь форматирование сообщения для отправки в telegram но не упоминай про это."
-   "для выделения курсива и жирного шрифта используй html теги но не указывай их в сообщении, не используй одинарных и двоных звездочек. вообще не используй символ * "
+   "для выделения курсива и жирного шрифта используй html теги но не указывай их в сообщении, не используй одинарных и двоных звездочек. вообще не используй символ * не используй символ звездочки "
    "Обрати внимание что название сделок хранится в поле TITLE. Критерии отбора и особенности ответа не нужны. Все деньги в BYN."
    "если направлений сделок несколько то выдели ТОП3 приоритетных для каждого направления сделок и сделай рекомендации для директора в кратком абзаце в конце"})
 
@@ -118,7 +118,7 @@ def reccomend_event(user,prompt):
 
    print(message)
    response = client.chat.completions.create(
-      model="deepseek-chat",
+      model="deepseek-reasoner",
       messages=messages
    )
    messages.append(response.choices[0].message)
@@ -126,7 +126,7 @@ def reccomend_event(user,prompt):
 
 
    response = client.chat.completions.create(
-      model="deepseek-chat",
+      model="deepseek-reasoner",
       messages=messages
    )
    requests.get('https://api.telegram.org/bot7216828718:AAFpVPusbLXoBYEWYpHg148EFBpPANGHdtk/sendMessage?chat_id='+str(user)+'&text='
