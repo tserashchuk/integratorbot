@@ -19,7 +19,7 @@ def addf(user):
   
    data = bx24.callMethod('crm.deal.list',
                   filter={'CLOSED': 'N',
-                           '>DATE_CREATE':'2025-03-31'},
+                           '>DATE_CREATE':'2025-04-07'},
                   select=['ID', 'TITLE', 'STAGE_ID','DATE_CREATE','DATE_MODIFY','CREATED_BY_ID','ASSIGNED_BY_ID','OPPORTUNITY','IS_RETURN_CUSTOMER','CONTACT_ID','CATEGORY_ID'])
    
    data = re.sub(r", ", ",", str(data))
@@ -87,7 +87,7 @@ def reccomend_event(user,prompt):
    manager_stats = {}
    bx24 = Bitrix24(str(myuser_hook[0].url))    
    data = bx24.callMethod('crm.deal.list',
-            filter={'CLOSED':'Y','STAGE_SEMANTIC_ID': 'S','>CLOSEDATE':'2025-03-31'})
+            filter={'CLOSED':'Y','STAGE_SEMANTIC_ID': 'S','>CLOSEDATE':'2025-04-07'})
    for deal in data:
       try:
             manager_id = deal.get("ASSIGNED_BY_ID", "unknown")
