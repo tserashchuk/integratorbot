@@ -11,7 +11,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django_celery_beat.models import PeriodicTask, CrontabSchedule
 
-from selenium import webdriver
 
 class AddHook(LoginRequiredMixin,View):
 
